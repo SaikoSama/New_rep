@@ -1,0 +1,327 @@
+{
+  "id": "88230c10-f986-45c2-9512-529c3691fd32",
+  "version": "2.0",
+  "name": "Lesson25(Wikipedia)",
+  "url": "https://ru.wikipedia.org",
+  "tests": [{
+    "id": "332da88b-46f2-4376-903a-c4cf9cd962de",
+    "name": "Работа с поисковой строкой, отображение искомой статьи и значения переменной",
+    "commands": [{
+      "id": "519f62b1-dd6c-49b3-a4b8-45d5f65cfc98",
+      "comment": "Стартовая страница",
+      "command": "open",
+      "target": "/wiki/%D0%97%D0%B0%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "21573a3d-a555-4421-b8df-a9ba9118b57b",
+      "comment": "Окно по умолчанию",
+      "command": "setWindowSize",
+      "target": "1300x930",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5209fba9-0f7a-4e43-b332-fb9aa89c8ea2",
+      "comment": "Обьявление и хранение переменной",
+      "command": "store",
+      "target": "Russian warship, go fuck yourself",
+      "targets": [],
+      "value": "Search"
+    }, {
+      "id": "e1c8c720-3c60-4988-8c1b-b5ed090b781a",
+      "comment": "Вставка в поле поиска переменной объявленой ранее",
+      "command": "type",
+      "target": "id=searchInput",
+      "targets": [],
+      "value": "${Search}"
+    }, {
+      "id": "aec4e8c5-48a8-4e85-a556-66b55a98c8ce",
+      "comment": "Нажатие на поиск",
+      "command": "click",
+      "target": "id=searchButton",
+      "targets": [
+        ["id=ooui-php-1", "id"],
+        ["name=search", "name"],
+        ["css=#ooui-php-1", "css:finder"],
+        ["xpath=//input[@id='ooui-php-1']", "xpath:attributes"],
+        ["xpath=//div[@id='searchText']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "97f79d54-2aaa-4ac8-b3e3-bc73e9a78147",
+      "comment": "Пауза, без нее не работает (не успевает, либо идет обработка)",
+      "command": "pause",
+      "target": "3000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a5b278c9-5c3c-4e4c-9b97-52a6187eba11",
+      "comment": "Проверка что запрошеный ранее текст есть на странице",
+      "command": "verifyElementPresent",
+      "target": "xpath=//*[text()='${Search}']  ",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6597339b-3e14-4c72-8db6-a05c09f17756",
+      "comment": "Проверка что в єтом елементе есть запрошеное ранее",
+      "command": "verifyElementPresent",
+      "target": "//*[@id=\"ooui-php-1\"]",
+      "targets": [],
+      "value": "value=${Search}"
+    }, {
+      "id": "9c52bf44-cbbb-47de-b98b-316be9696977",
+      "comment": "Просто что такого елемента с условной рекламой (которая должна быть на даной странице) нет",
+      "command": "assertElementNotPresent",
+      "target": "xpath=//div[@id='market_banner']",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4004cf59-856e-4a81-a0ae-6c911dbfbbdb",
+      "comment": "Проверка, что в етом елементе нет ничего лишнего кроме запрошенного ранее",
+      "command": "verifyNotText",
+      "target": "xpath=//*[@id=\"ooui-php-1\"]",
+      "targets": [],
+      "value": "not(${Search})"
+    }]
+  }, {
+    "id": "5a58e10a-fd03-4a7e-ad81-21b3c040dec5",
+    "name": "NOt used Проверка навигации через елемент страницы Link text",
+    "commands": [{
+      "id": "0abf74cb-4232-4e79-8674-ce1a92083d6e",
+      "comment": "Открыть страницу",
+      "command": "//open",
+      "target": "https://ru.wikipedia.org/wiki",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "704d41ff-79f2-4c32-acdb-0fdc6ab99cb0",
+      "comment": "Заход на конкретную статью",
+      "command": "//open",
+      "target": "https://ru.wikipedia.org/wiki/%D0%9A%D0%BB%D0%B0%D1%80%D0%BA,_%D0%90%D1%80%D1%82%D1%83%D1%80_%D0%A7%D0%B0%D1%80%D0%BB%D1%8C%D0%B7",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b4c48f49-6521-450b-98d9-dffe1cc79498",
+      "comment": "Задержка прогрузка",
+      "command": "//pause",
+      "target": "",
+      "targets": [],
+      "value": "2000"
+    }, {
+      "id": "3d71b25a-0b13-4842-95e3-9a5cacff648f",
+      "comment": "Проверка что этот елемент уже доступен",
+      "command": "//waitForElementPresent",
+      "target": "//*[@id=\"p-logo\"]",
+      "targets": [],
+      "value": "30000"
+    }, {
+      "id": "90600166-b63b-49c1-bddc-038b1f8b6681",
+      "comment": "Задержка чтоб точно увидеть что обновилось",
+      "command": "//pause",
+      "target": "",
+      "targets": [],
+      "value": "6000"
+    }, {
+      "id": "180a92c3-d736-463d-befa-57e237d369c7",
+      "comment": "Клик по лого для перехода к главной страницы (обновление)",
+      "command": "//click",
+      "target": "//*[@id=\"p-logo\"]/a",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "54f5729d-50b9-4758-a51e-c5dceeda1327",
+      "comment": "Проверка что на странице есть упоминание на Заглавную страницу т.е. там где надо",
+      "command": "//verifyElementPresent",
+      "target": "xpath=//span[text()='Заглавная страница']",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ac47fd66-6b4a-44c7-8a7d-512c949d1049",
+      "comment": "",
+      "command": "//pause",
+      "target": "",
+      "targets": [],
+      "value": "10000"
+    }, {
+      "id": "1bee0dcd-0975-4752-aa23-55cbd511537a",
+      "comment": "Проверка что в шапке етот блок нельзя изменить",
+      "command": "//verifyElementPresent",
+      "target": "class=main-block main-wikimedia main-plainlist",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "83e30411-1dfd-4f0a-82ae-a61c0d1542c1",
+    "name": "Регистрация(1 try than change data in values)",
+    "commands": [{
+      "id": "72a847af-b7b8-46ca-83d6-60879d1341f7",
+      "comment": "Заглушка (перед выполнением подготовить почту и имена) 1 прогонка",
+      "command": "",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "de480c83-7456-401a-8baf-e35b25982c5c",
+      "comment": "Открыть форму регистрации",
+      "command": "open",
+      "target": "https://en.wikipedia.org/w/index.php?title=Special:CreateAccount",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "976714ea-c3fb-436c-8c9e-1ccfab5fd9ed",
+      "comment": "Name_Переменная",
+      "command": "store",
+      "target": "Newusertest556",
+      "targets": [],
+      "value": "Name"
+    }, {
+      "id": "e1f51f33-f14d-44a0-80e0-3aaa41891e45",
+      "comment": "PSWD_Переменная",
+      "command": "store",
+      "target": "Password556",
+      "targets": [],
+      "value": "PSWD"
+    }, {
+      "id": "39d5c16b-446a-4741-b576-17d70ae5b3f0",
+      "comment": "Email_Переменная",
+      "command": "store",
+      "target": "SaikoPrist@gmail.com",
+      "targets": [],
+      "value": "Email"
+    }, {
+      "id": "b81e9e9c-841a-48bc-9dd0-ae806ae4f6d2",
+      "comment": "Input Name",
+      "command": "type",
+      "target": "xpath=//*[@id=\"wpName2\"]",
+      "targets": [],
+      "value": "${Name} "
+    }, {
+      "id": "62366dc1-cb8b-4373-b5b4-ca068078f005",
+      "comment": "Input Password",
+      "command": "type",
+      "target": "//*[@id=\"wpPassword2\"]",
+      "targets": [],
+      "value": "${Name} ${PSWD}"
+    }, {
+      "id": "ce229a26-81fd-4b34-ae4b-f87698b4c93d",
+      "comment": "Confirmation PSWD",
+      "command": "type",
+      "target": "//*[@id=\"wpRetype\"]",
+      "targets": [],
+      "value": "${Name} ${PSWD}"
+    }, {
+      "id": "d7f490cc-fb04-443b-bbf5-3e69a4817a7b",
+      "comment": "Input Email",
+      "command": "type",
+      "target": "//*[@id=\"wpEmail\"]",
+      "targets": [],
+      "value": "${Email} "
+    }, {
+      "id": "891473ea-a76e-424a-ae82-4953b40b31b3",
+      "comment": "Проверка что кнопка регистрации существует",
+      "command": "assertElementPresent",
+      "target": "//*[@id=\"wpCreateaccount\"]",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d66d5bc6-9798-4058-a6cc-c45c0e5ce8a3",
+      "comment": "Ввести капчу за 60секунд)",
+      "command": "pause",
+      "target": "",
+      "targets": [],
+      "value": "60000"
+    }, {
+      "id": "78012ebb-daf6-4886-936d-73f6476ce51a",
+      "comment": "Нажатие на регистрацию",
+      "command": "click",
+      "target": "//*[@id=\"wpCreateaccount\"]",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f1571699-f6bf-46af-9f2c-139b237dd1f8",
+      "comment": "Типа проверка что зарегистрировались по присутствию фразы \"Welcome\"",
+      "command": "verifyElementPresent",
+      "target": "xpath=//*[text()='Welcome']  ",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "01e1f7ed-eec5-479e-b7ac-46c1affcad4b",
+    "name": "Authorisation (auto-fullfill check)",
+    "commands": [{
+      "id": "53a038e0-dd6a-49ba-b06e-01667e21e240",
+      "comment": "Открыть сайт",
+      "command": "open",
+      "target": "https://en.wikipedia.org/wiki",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "36c39582-5850-4684-9c0d-5564a0ae7556",
+      "comment": "Нажать на авторизацию",
+      "command": "click",
+      "target": "//*[@id=\"pt-login-2\"]/a",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1b8c54cd-3770-434c-a94c-664b743f87aa",
+      "comment": "Ждем автозаполнения",
+      "command": "pause",
+      "target": "",
+      "targets": [],
+      "value": "120000"
+    }, {
+      "id": "b54ff479-908f-473a-807d-c2cac82b63e0",
+      "comment": "Проверка что верное значение имени подтянулось",
+      "command": "verifyElementPresent",
+      "target": "//*[@id=\"wpName1\"]",
+      "targets": [],
+      "value": "value='Newusertest556'"
+    }, {
+      "id": "cabccd0f-7616-4d17-a9bf-ce25fc003b13",
+      "comment": "Нажать на кнопку залогинивания",
+      "command": "click",
+      "target": "//*[@id=\"wpLoginAttempt\"]",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "55669357-2ce8-49d5-9f52-f83265a63de4",
+      "comment": "Ждем прогрузку",
+      "command": "waitForElementPresent",
+      "target": "//*[@id=\"vector-user-links-dropdown-checkbox\"]",
+      "targets": [],
+      "value": "6000"
+    }, {
+      "id": "c5c76be6-ef71-43e4-893d-88091a959b2d",
+      "comment": "Newusertest556 присутствует в шапке Залогинен",
+      "command": "verifyElementPresent",
+      "target": "//*[@id=\"pt-userpage-2\"]/a",
+      "targets": [],
+      "value": "value='Newusertest556'"
+    }, {
+      "id": "d93101b2-a475-459b-b406-af7cd128b1fa",
+      "comment": "Дропдаун пользователя меню",
+      "command": "click",
+      "target": "//*[@id=\"vector-user-links-dropdown-checkbox\"]",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "259cb291-32df-431b-9d11-ad40f7682a09",
+      "comment": "Разлогинивание",
+      "command": "click",
+      "target": "//*[@id=\"pt-logout\"]/a",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "b6da5777-5bc8-45ed-ad56-b674715c0639",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["332da88b-46f2-4376-903a-c4cf9cd962de"]
+  }],
+  "urls": ["https://ru.wikipedia.org/"],
+  "plugins": []
+}
